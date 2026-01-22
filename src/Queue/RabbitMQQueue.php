@@ -204,7 +204,7 @@ class RabbitMQQueue extends Queue implements QueueContract, RabbitMQQueueContrac
     /**
      * @throws AMQPProtocolChannelException
      */
-    public function bulkRaw(string $payload, string $queue = null, array $options = []): int|string|null
+    public function bulkRaw(string $payload, ?string $queue = null, array $options = []): int|string|null
     {
         [$destination, $exchange, $exchangeType, $attempts] = $this->publishProperties($queue, $options);
 
@@ -397,7 +397,7 @@ class RabbitMQQueue extends Queue implements QueueContract, RabbitMQQueueContrac
      *
      * @throws AMQPProtocolChannelException
      */
-    public function isQueueExists(string $name = null): bool
+    public function isQueueExists(?string $name = null): bool
     {
         $queueName = $this->getQueue($name);
 
@@ -484,7 +484,7 @@ class RabbitMQQueue extends Queue implements QueueContract, RabbitMQQueueContrac
     /**
      * Purge the queue of messages.
      */
-    public function purge(string $queue = null): void
+    public function purge(?string $queue = null): void
     {
         // create a temporary channel, so the main channel will not be closed on exception
         $channel = $this->createChannel();
